@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <h1>PPS Global Citizen Dashboard</h1>
+    <div id="status">Connecting to AI Core...</div>
+    <button onclick="fetchData()">Run AI Analysis</button>
+    <pre id="output"></pre>
+
+    <script>
+        async function fetchData() {
+            // Note: Replace with your actual token after logging in
+            const token = "PASTE_YOUR_TOKEN_HERE";
+            const response = await fetch('http://127.0.0.1:8000/api/v1/orchestrate', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({ intent: "analyze" })
+            });
+            const data = await response.json();
+            document.getElementById('output').innerText = JSON.stringify(data, null, 2);
+        }
+    </script>
+</body>
+</html>
